@@ -5,13 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.AlbumDao;
+//import dao.AlbumDao;
 import dao.ArtistDao;
 import entity.Artist;
 
 public class Menu {
     
-		private AlbumDao albumDao = new AlbumDao();
 		private ArtistDao artistDao = new ArtistDao();
 		private final String DATABASE_NAME = "recording_artists";
 		private Scanner scanner = new Scanner(System.in);
