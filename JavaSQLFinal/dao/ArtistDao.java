@@ -14,6 +14,7 @@ public class ArtistDao {
 	private Connection connection;
 	private final String GET_ARTISTS_QUERY = "SELECT * FROM artist";
 	private final String GET_ARTIST_BY_NAME_QUERY = "SELECT * FROM artist WHERE artist_name = ?";
+	private final String GET_ARTIST_BY_ID_QUERY = "SELECT * FROM artist WHERE artist_id = ?";
 	private final String CREATE_NEW_ARTIST_UPDATE = "INSERT INTO artist (artist_name) VALUES (?)";
 	private final String DELETE_ARTIST_UPDATE = "DELETE FROM artist WHERE artist_name = ?";
 	private final String UPDATE_ARTIST_UPDATE = "UPDATE artist SET artist_name = ? WHERE artist_id = ?";
@@ -35,6 +36,17 @@ public class ArtistDao {
 	public Artist getArtistByName(String artistName) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement (GET_ARTIST_BY_NAME_QUERY);
 		ps.setString(1,artistName);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			return populateArtist(rs.getInt(1),rs.getString(2));
+		} else {
+			return null;
+		}
+	}
+	
+	public Artist getArtistById(int artistId) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement (GET_ARTIST_BY_ID_QUERY);
+		ps.setInt(1,artistId);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			return populateArtist(rs.getInt(1),rs.getString(2));
