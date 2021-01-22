@@ -160,18 +160,19 @@ public class Menu {
 	private void displayAllAlbums() throws SQLException {
 		/*
 		 * No need for input... print all album data
-		 */
-		
+		 */		
 		List<Album> albums = albumDao.getAlbums();
 		for (Album album : albums) {	
-			System.out.println("Id: " + album.getAlbumId() + " \tName: " + album.getAlbumName() );
+			Artist artist = artistDao.getArtistById(album.getArtistId());			
+			System.out.println("\nName: " + album.getAlbumName() + "\n\tId: " + album.getAlbumId() + "\tArtist: " + artist.getArtistName() 
+					+ "\n\tLabel: " + album.getLabel() + "\tGenre: " + album.getGenre());
 		}
 	}
 	
 	/*
 	 * Method:  addNewAlbum()
 	 */	
-	private void addNewAlbum() {
+	private void addNewAlbum() throws SQLException {
 		/*
 		 * prompt user for all new album data
 		 */
@@ -180,14 +181,17 @@ public class Menu {
 		System.out.print("Enter Artist: ");
 		String artistName = scanner.nextLine();	  // Use this to find the Artist_ID by calling 
 												  // artistDao.getArtistByName(artistName).getArtist_id();
+		Artist artist = artistDao.getArtistByName(artistName);			
+		if (artist == null) {
+			artistDao.createNewArtist(artistName);
+			artist = artistDao.getArtistByName(artistName);
+		}
 		System.out.print("Enter Label: ");
 		String labelName = scanner.nextLine();	
 		System.out.print("Enter Genre: ");
 		String genre = scanner.nextLine();	
 
-		/*
-		 * ADD CODE 
-		 */
+		albumDao.createAlbum(artist.getArtistId(), albumName, labelName, genre);
 	}
 
 	/*
@@ -232,11 +236,7 @@ public class Menu {
 		 */
 		List<Artist> artists = artistDao.getArtists();
 		for (Artist artist : artists) {
-
-				
-
 			System.out.println("Id: " + artist.getArtistId() + " \tName: " + artist.getArtistName());	
-
 		}		
 		
 	}
@@ -302,7 +302,6 @@ public class Menu {
 
 		} else {
 
-
 			System.out.println("Id: " + artist.getArtistId() + " \tName: " + artist.getArtistName());	
 
 			System.out.println();
@@ -331,13 +330,20 @@ public class Menu {
 	 * Method:  addNewCert()
 	 */	
 	private void addNewCert() throws SQLException {
-		
-		System.out.println("Enter New Certification...");
-		String certStatus = scanner.nextLine(); 
-		System.out.println("Enter Certifcation Date..");
-		String certDate = scanner.nextLine(); 
-		certificationDao.addNewCert (certStatus, certDate);
 
+		System.out.print("Enter Name of Album for New Certification: ");
+		String albumName = scanner.nextLine();
+		Album album = albumDao.getAlbumByName(albumName);
+		if (album == null) {
+			System.out.println("Album Not Found in database: " + DATABASE_NAME);
+			System.out.println("Add New Certification not performed!");
+		} else {	
+			System.out.println("Enter New Certification...");
+			String certStatus = scanner.nextLine(); 
+			System.out.println("Enter Certifcation Date..");
+			String certDate = scanner.nextLine(); 
+			certificationDao.addNewCert(album.getAlbumId(), certStatus, certDate);
+		}	
 	}
 
 	/*
@@ -357,7 +363,7 @@ public class Menu {
 	private void updateCert() throws SQLException {
 		
 		System.out.println("Enter Certification ID to update...");
-		int certId = scanner.nextInt();
+		int certId = Integer.parseInt(scanner.nextLine());
 		System.out.println("Enter New Certification Status...");
 		String certStatus = scanner.nextLine();
 		System.out.println("Enter New Certification Date...");
