@@ -1,16 +1,20 @@
 package entity;
 
 public class Artist {
+
 	private  int artistId;
 	private String artistName;
+
 	
 	/*
 	 * Constructor
 	 */
 	
+
 	public Artist (int artistId, String artistName) {
 		this.artistId = artistId;
 		this.artistName = artistName;
+
 	}
 
 	
@@ -18,6 +22,12 @@ public class Artist {
 	 * Getters & Setters
 	 */
 	
+
+
+	
+
+	
+
 	public int getArtistId() {
 		return artistId;
 	}
@@ -32,6 +42,7 @@ public class Artist {
 
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
+
 	}
 	
 	

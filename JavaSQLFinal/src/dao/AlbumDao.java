@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+<<<<<<< HEAD
+=======
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +11,17 @@ import java.util.List;
 
 import entity.Album;
 
+
 public class AlbumDao {
 
 	private Connection connection;
+
+	
+	public AlbumDao() {
+		connection = DBConnection.getConnection();
+	}
+	
+
 	private final String GET_ALBUM_BY_ALBUM_NAME_QUERY = "SELECT * FROM recording_artists WHERE album_name = ? ";
 	private final String CREATE_NEW_ALBUM_QUERY = "INSERT INTO recording_artists(album_name, label, genre) VALUES(?, ?, ?)";
 	private final String DELETE_ALBUM_NAME_QUERY = "DELETE FROM recording_artists WHERE album_name = ?";
@@ -59,4 +69,5 @@ public class AlbumDao {
 		ps.setString(3, genre);
 		ps.executeUpdate();
 	}
+
 }

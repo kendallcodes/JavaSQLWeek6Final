@@ -59,12 +59,17 @@ public class ArtistDao {
 		Artist artist = getArtistByName(artistName);
 		PreparedStatement ps = connection.prepareStatement (UPDATE_ARTIST_UPDATE);
 		ps.setString(1, newName);
+
+	
 		ps.setInt(2, artist.getArtistId());
+
 		ps.executeUpdate();	
 	}
 	
 
+
 	private Artist populateArtist(int artistId, String artistName) {
 		return new Artist(artistId,artistName);
+
 	}
 }
