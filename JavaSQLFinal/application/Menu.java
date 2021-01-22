@@ -7,21 +7,15 @@ import java.util.Scanner;
 
 import dao.AlbumDao;
 import dao.ArtistDao;
+import dao.CertificationDao;
+import entity.Album;
 import entity.Artist;
 import entity.Certification;
-import dao.CertificationDao;
 
 public class Menu {
-    
-		private AlbumDao albumDao = new AlbumDao();
-//import dao.AlbumDao;
-import dao.ArtistDao;
-import entity.Artist;
-
-public class Menu {
-    
-
+		private AlbumDao albumDao = new AlbumDao();    
 		private ArtistDao artistDao = new ArtistDao();
+		private CertificationDao certificationDao = new CertificationDao();
 		private final String DATABASE_NAME = "recording_artists";
 		private Scanner scanner = new Scanner(System.in);
 		private List<String> options = Arrays.asList("Album Menu",
@@ -163,15 +157,15 @@ public class Menu {
 	/*
 	 * Method:  displayAllAlbums()
 	 */
-	private void displayAllAlbums() {
+	private void displayAllAlbums() throws SQLException {
 		/*
 		 * No need for input... print all album data
 		 */
 		
-		/*
-		 * ADD CODE 
-		 */
-		
+		List<Album> albums = albumDao.getAlbums();
+		for (Album album : albums) {	
+			System.out.println("Id: " + album.getAlbumId() + " \tName: " + album.getAlbumName() );
+		}
 	}
 	
 	/*
@@ -325,65 +319,42 @@ public class Menu {
 	/*
 	 * Method:  displayAllCerts()
 	 */
-
 		private void displayAllCerts() throws SQLException {
-			List<Certification> certification = CertificationDao.displayAllCerts();
+			List<Certification> certification = certificationDao.displayAllCerts();
 				for (Certification certs : certification) {
-				System.out.println(certs.getcertId() + " " + certs.getalbumId() + " " + certs.getCertStatus() + " " + certs.getCertDate()); 
+				System.out.println(certs.getCertId() + " " + certs.getAlbumId() + " " + certs.getCertStatus() + " " + certs.getCertDate()); 
 					}
 	}
 
 
-	private void displayAllCerts() {
-		/*
-		 * No need for input... print all certification data
-		 */
-
-		/*
-		 * ADD CODE
-		 */
-		
-	}
-	
-
 	/*
 	 * Method:  addNewCert()
 	 */	
-	private void addNewCert() {
-
+	private void addNewCert() throws SQLException {
 		
 		System.out.println("Enter New Certification...");
 		String certStatus = scanner.nextLine(); 
 		System.out.println("Enter Certifcation Date..");
 		String certDate = scanner.nextLine(); 
-		CertificationDao.addNewCert (certStatus, certDate);
-
-		/*
-		 * prompt user for album to add certification data
-		 * 		check to see if that album exists (in album table) & retrieve album_id
-		 * 		prompt for new data (cert_date & ???)
-		 */
-
-
-
-		/*
-		 * ADD CODE
-		 */
-
+		certificationDao.addNewCert (certStatus, certDate);
 
 	}
 
 	/*
 	 * Method:  deleteCert()
 	 */
-	private void deleteCert() {
+	private void deleteCert() throws SQLException {
 
 		System.out.println("Enter Certification Id to delete....");
 		int certId = Integer.parseInt(scanner.nextLine());
-		CertificationDao.deleteCert(certId);
+		certificationDao.deleteCert(certId);
 	}
 
-	private void updateCert() {
+	/*
+	 * Method:  updateCert()
+	 */
+
+	private void updateCert() throws SQLException {
 		
 		System.out.println("Enter Certification ID to update...");
 		int certId = scanner.nextInt();
@@ -391,34 +362,12 @@ public class Menu {
 		String certStatus = scanner.nextLine();
 		System.out.println("Enter New Certification Date...");
 		String certDate = scanner.nextLine();
-		CertificationDao.updateCert(certId, certStatus, certDate);
-
-		/*
-		 * prompt user for ???, and confirm that they want to delete?:
-		 */
-	
-		/*
-		 * ADD CODE
-		 */
+		certificationDao.updateCert(certId, certStatus, certDate);
 
 		
 	}
 
-	/*
-	 * Method:  updateCert()
-	 */
-	private void updateCert() {
-		/*
-		 * prompt user for ???, and possible input changes:
-		 */
 
-		/*
-		 * ADD CODE
-		 */
-
-
-		
-	}
 	/*
 	 * Method:  printMenu()
 	 */

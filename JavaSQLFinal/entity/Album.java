@@ -2,15 +2,16 @@ package entity;
 
 public class Album {
 	private int albumId;
-	private String artistId;
+	private int artistId;
 	private String albumName;
 	private String label;
 	private String genre;
 	
 	//Constructor
 	
-	public Album(int albumId, String albumName, String label, String genre) {  // is this correct nomenclature
+	public Album(int albumId, int artistId, String albumName, String label, String genre) {  // is this correct nomenclature
 		this.setAlbumId(albumId);
+		this.setArtistId(artistId);
 		this.setAlbumName(albumName);
 		this.setLabel(label);
 		this.setGenre(genre);
@@ -25,6 +26,15 @@ public class Album {
 
 	public void setAlbumId(int albumId) {
 		this.albumId = albumId;
+	}
+
+	public int getArtistId() {
+		return artistId;
+	}
+
+
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
 	}
 
 

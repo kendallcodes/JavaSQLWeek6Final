@@ -10,10 +10,10 @@ public class Certification {
 
 
 	public Certification (int certId, int albumId, String certStatus, String certDate) {
-		this.getAlbumId();
-		this.getCertId();
-		this.getCertStatus();
-		this.getCertDate();
+		this.setAlbumId(albumId);
+		this.setCertId(certId);
+		this.setCertStatus(certStatus);
+		this.setCertDate(certDate);
 	}
 
 	public int getCertId() {
