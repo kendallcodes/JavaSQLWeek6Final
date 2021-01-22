@@ -1,16 +1,20 @@
 package entity;
 
 public class Artist {
-	private  int artist_id;
-	private String artist_name;
+
+	private  int artistId;
+	private String artistName;
+
 	
 	/*
 	 * Constructor
 	 */
 	
-	public Artist (int artist_id, String artist_name) {
-		this.artist_id = artist_id;
-		this.artist_name = artist_name;
+
+	public Artist (int artistId, String artistName) {
+		this.artistId = artistId;
+		this.artistName = artistName;
+
 	}
 
 	
@@ -18,20 +22,27 @@ public class Artist {
 	 * Getters & Setters
 	 */
 	
-	public int getArtist_id() {
-		return artist_id;
+
+
+	
+
+	
+
+	public int getArtistId() {
+		return artistId;
 	}
 
-	public void setArtist_id(int artist_id) {
-		this.artist_id = artist_id;
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
 	}
 
-	public String getArtist_name() {
-		return artist_name;
+	public String getArtistName() {
+		return artistName;
 	}
 
-	public void setArtist_name(String artist_name) {
-		this.artist_name = artist_name;
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+
 	}
 	
 	
