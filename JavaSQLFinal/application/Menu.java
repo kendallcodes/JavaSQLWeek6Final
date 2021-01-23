@@ -231,9 +231,11 @@ public class Menu {
 			int albumId = album.getAlbumId();
 			System.out.print("Enter Change to Album Name: ");
 			String newName = scanner.nextLine();
-			if (newName == null) {
+			
+			if (newName.equals("")) {
 				newName = albumName;
 			}
+			
 			System.out.print("Enter Name of Label to Update: ");
 			String label = scanner.nextLine();	
 			System.out.print("Enter Genre to Update: ");
