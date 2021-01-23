@@ -197,34 +197,61 @@ public class Menu {
 	/*
 	 * Method:  deleteAlbum()
 	 */
-	private void deleteAlbum() {
+	private void deleteAlbum() throws SQLException {
 		/*
 		 * prompt user for album name, and confirm that they want to delete?:
 		 */
 		System.out.print("Enter Name of Album to Delete: ");
 		String albumName = scanner.nextLine();	
-		System.out.println("Deleting Album...");
-
-		/*
-		 * ADD CODE 
-		 */
+		Album album = albumDao.getAlbumByName(albumName);
+		if (album == null) {
+			System.out.println("Album doesn't exist!");
+		} else {
+			System.out.println("Deleting Album...");
+			albumDao.deleteAlbumByName(albumName);
+		}
+			
+		
 		
 	}
 
 	/*
 	 * Method:  updateAlbum()
 	 */
-	private void updateAlbum() {
+	private void updateAlbum() throws SQLException {
 		/*
 		 * prompt user for album name, and possible input changes:
 		 */
 		System.out.print("Enter Name of Album to Update: ");
 		String albumName = scanner.nextLine();	
-		System.out.println("Updating Album...");
+		Album album = albumDao.getAlbumByName(albumName);
+		if (album == null) {
+			System.out.println("Album doesn't exist!");
+		} else {
+			System.out.print("Enter Name of Artist to Update: ");
+			String artistName = scanner.nextLine();	
 
-		/*
-		 * ADD CODE 
-		 */
+			Artist artist = artistDao.getArtistByName(artistName);			
+			if (artist == null) {
+				artistDao.createNewArtist(artistName);
+				artist = artistDao.getArtistByName(artistName);
+				System.out.println("New Artist!");
+			}
+			int albumId = album.getAlbumId();
+			System.out.print("Enter Change to Album Name: ");
+			String newName = scanner.nextLine();
+			if (newName == null) {
+				newName = albumName;
+			}
+			System.out.print("Enter Name of Label to Update: ");
+			String label = scanner.nextLine();	
+			System.out.print("Enter Genre to Update: ");
+			String genre = scanner.nextLine();	
+			
+			System.out.println("Updating Album...");
+			albumDao.updateAlbum(albumId, artist.getArtistId(),newName,label,genre);
+		}
+		
 	}
 
 	/*
