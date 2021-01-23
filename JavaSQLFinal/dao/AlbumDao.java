@@ -17,7 +17,7 @@ public class AlbumDao {
 	private final String GET_ALL_ALBUMS_QUERY = "SELECT * FROM album";
 	private final String CREATE_NEW_ALBUM_QUERY = "INSERT INTO album (artist_id, album_name, label, genre) VALUES(?, ?, ?, ?)";
 	private final String DELETE_ALBUM_NAME_QUERY = "DELETE FROM album WHERE album_name = ?";
-	private final String UPDATE_ALBUM_NAME_QUERY = "UPDATE FROM album WHERE album_name = ?";
+	private final String UPDATE_ALBUM_QUERY = "UPDATE album SET artist_id = ?, label = ?, genre = ?, album_name = ? WHERE album_id = ?";
 	
 	public AlbumDao() {
 		connection = DBConnection.getConnection();
@@ -71,12 +71,14 @@ public class AlbumDao {
 		ps.executeUpdate();        	
 	}
 	
-	public void updateAlbumByName(String albumName, int artistId, String label, String genre) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(UPDATE_ALBUM_NAME_QUERY);
-		ps.setString(1, albumName);
-		ps.setInt(2, artistId );
+	public void updateAlbum(int albumId, int artistId, String albumName, String label, String genre) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(UPDATE_ALBUM_QUERY);
+		System.out.println(albumId + " " + artistId + " " + albumName + " " + label + " " + genre);
+		ps.setInt(1, artistId);
 		ps.setString(2, label);
 		ps.setString(3, genre);
+		ps.setString(4, albumName);
+		ps.setInt(5, albumId );
 		ps.executeUpdate();
 	}
 	
