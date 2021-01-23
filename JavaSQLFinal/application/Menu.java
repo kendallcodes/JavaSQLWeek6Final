@@ -228,15 +228,6 @@ public class Menu {
 		if (album == null) {
 			System.out.println("Album doesn't exist!");
 		} else {
-			System.out.print("Enter Name of Artist to Update: ");
-			String artistName = scanner.nextLine();	
-
-			Artist artist = artistDao.getArtistByName(artistName);			
-			if (artist == null) {
-				artistDao.createNewArtist(artistName);
-				artist = artistDao.getArtistByName(artistName);
-				System.out.println("New Artist!");
-			}
 			int albumId = album.getAlbumId();
 			System.out.print("Enter Change to Album Name: ");
 			String newName = scanner.nextLine();
@@ -249,7 +240,7 @@ public class Menu {
 			String genre = scanner.nextLine();	
 			
 			System.out.println("Updating Album...");
-			albumDao.updateAlbum(albumId, artist.getArtistId(),newName,label,genre);
+			albumDao.updateAlbum(albumId, album.getArtistId(),newName,label,genre);
 		}
 		
 	}
@@ -377,7 +368,6 @@ public class Menu {
 	 * Method:  deleteCert()
 	 */
 	private void deleteCert() throws SQLException {
-
 		System.out.println("Enter Certification Id to delete....");
 		int certId = Integer.parseInt(scanner.nextLine());
 		certificationDao.deleteCert(certId);
@@ -390,7 +380,7 @@ public class Menu {
 	private void updateCert() throws SQLException {
 		
 		System.out.println("Enter Certification ID to update...");
-		int certId = Integer.parseInt(scanner.nextLine());
+		int certId = Integer.parseInt(scanner.nextLine());		
 		System.out.println("Enter New Certification Status...");
 		String certStatus = scanner.nextLine();
 		System.out.println("Enter New Certification Date...");

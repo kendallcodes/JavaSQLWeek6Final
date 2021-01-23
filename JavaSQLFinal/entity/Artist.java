@@ -8,24 +8,17 @@ public class Artist {
 	
 	/*
 	 * Constructor
-	 */
-	
+	 */	
 
 	public Artist (int artistId, String artistName) {
 		this.artistId = artistId;
 		this.artistName = artistName;
 
 	}
-
 	
 	/*
 	 * Getters & Setters
 	 */
-	
-
-
-	
-
 	
 
 	public int getArtistId() {

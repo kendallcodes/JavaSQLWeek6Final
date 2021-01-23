@@ -73,7 +73,6 @@ public class AlbumDao {
 	
 	public void updateAlbum(int albumId, int artistId, String albumName, String label, String genre) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(UPDATE_ALBUM_QUERY);
-		System.out.println(albumId + " " + artistId + " " + albumName + " " + label + " " + genre);
 		ps.setInt(1, artistId);
 		ps.setString(2, label);
 		ps.setString(3, genre);

@@ -47,8 +47,8 @@ public class Certification {
 	public void setCertDate(String certDate) {
 		this.certDate = certDate;
 	
-}
+    }
 
 	
-	}
+}
 	
